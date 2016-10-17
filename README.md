@@ -6,7 +6,7 @@
 
 #### Ao executar o programa sem utilizar argumentos pela linha de comando, o programa irá pedir ao usuário a URL do álbum desejado. Ele então irá carregar todas as informações do álbum para que o download das imagens possa ser realizado.
 
-#### Após carregar as informações, o programa irá criar uma pasta no diretório atual com o nome do álbum escolhido e dentro dela irá fazer o download das imagens.
+#### Após carregar as informações, o programa irá criar uma pasta no diretório atual do programa com o nome do álbum escolhido e dentro dela irá fazer o download das imagens.
 
 ### Opções:
 
