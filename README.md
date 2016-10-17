@@ -19,7 +19,7 @@
     -------
     -h || --help       Mostra o menu de ajuda.
 
-#### É possível inserir a URL do álbum diretamente pela linha de comando, caso contrário, o programa irá pedir pela URL.
+#### É possível inserir a URL do álbum diretamente pela linha de comando. Caso contrário, o programa irá pedir pela URL.
 
 ### Requerimentos:
  - Python 2.x
