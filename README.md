@@ -8,7 +8,9 @@
 
 #### Após carregar as informações, o programa irá criar uma pasta no diretório atual do programa com o nome do álbum escolhido e dentro dela irá fazer o download das imagens.
 
-### Opções:
+![G.E-Downloader](http://i.imgur.com/gv6MLnH.png)
+
+### Opções (CLI):
 
 #### Aqui estão algumas opções disponíveis e que podem ser inseridas como argumentos pela linha de comando:
 
@@ -21,7 +23,7 @@
 
 #### É possível inserir a URL do álbum diretamente pela linha de comando. Caso contrário, o programa irá pedir pela URL.
 
-### Requerimentos:
+### Requerimentos (CLI):
  - Python 2.x
  - BeautifulSoup4
 
@@ -29,7 +31,14 @@
 
     sudo pip install beautifulsoup4
 
-### Download:
+### Requerimentos (GUI):
+- ***Linux:*** 
+- (x86): Pode ser executado diretamente, sem qualquer requisito ou dependência.
+- (x64): Pode ser executado diretamente, sem qualquer requisito ou dependência. Requer bibliotecas de compatibilidade caso escolha a versão em x86.
+- ***Windows:*** 
+- (x86 & x64): Requer o Microsoft Visual C++ 2010 Redistributable instalado (provavelmente já vem instalado em sistemas atualizados).
+
+### Download (CLI):
 
 #### Você poderá baixar o programa utilizando o git:
 
@@ -42,5 +51,11 @@
     wget "https://raw.github.com/Wolfterro/G.E-Downloader/master/GEDownloader.py"
     chmod +x GEDownloader.py
     ./GEDownloader.py [URL / OPÇÕES]
+
+### Download (GUI):
+
+#### Linux: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.0-Linux
+
+#### Windows: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.0-Windows
 
 #### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/G.E-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
