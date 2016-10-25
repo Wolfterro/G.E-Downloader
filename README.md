@@ -10,6 +10,8 @@
 
 ![G.E-Downloader](http://i.imgur.com/gv6MLnH.png)
 
+## [Verifique o CHANGELOG para maiores informações sobre novas versões](https://raw.github.com/Wolfterro/G.E-Downloader/master/CHANGELOG.txt)
+
 ### Opções (CLI):
 
 #### Aqui estão algumas opções disponíveis e que podem ser inseridas como argumentos pela linha de comando:
@@ -38,6 +40,21 @@
 - ***Windows:*** 
 - (x86 & x64): Requer o Microsoft Visual C++ 2010 Redistributable instalado (provavelmente já vem instalado em sistemas atualizados).
 
+### Compilando (GUI):
+- Python 2.7
+- PyQt4 para Python 2.7
+- BeautifulSoup4
+- PyInstaller
+- Microsoft Visual C++ 2010 Redistributable (Windows apenas)
+
+#### Execute o PyInstaller para compilar o programa:
+
+      - Linux:
+      pyinstaller --noconsole --onefile GEDownloader.py
+      
+      - Windows
+      pyinstaller --icon="Icon.ico" --noconsole --onefile GEDownloader.py
+
 ### Download (CLI):
 
 #### Você poderá baixar o programa utilizando o git:
@@ -54,8 +71,8 @@
 
 ### Download (GUI):
 
-#### Linux: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.0-Linux
+#### Linux: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.1-Linux
 
-#### Windows: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.0-Windows
+#### Windows: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.1-Windows
 
 #### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/G.E-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
