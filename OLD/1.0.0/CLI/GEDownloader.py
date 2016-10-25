@@ -27,8 +27,8 @@ SOFTWARE.
 
 #========================================
 # Criado por: Wolfterro
-# Versão: 1.0.1 - Python 2.x
-# Data: 24/10/2016
+# Versão: 1.0.0 - Python 2.x
+# Data: 17/10/2016
 #========================================
 
 from __future__ import print_function
@@ -47,7 +47,7 @@ sys.setdefaultencoding('utf-8')
 
 # Versão
 # ======
-VERSION = "1.0.1"
+VERSION = "1.0.0"
 
 # Criando um diretório para as imagens do álbum
 # =============================================
@@ -216,19 +216,12 @@ def checkURLDomain(albumURL):
 		print("[G.E-Downloader] Erro! URL inválida! Saindo ...")
 		sys.exit(1)
 
-# Limpando a URL para que ela aponte para a primeira página
-# =========================================================
-def cleanURL(albumURL):
-	albumURL = re.sub(r'/\?p=.*', '', albumURL)
-	return albumURL
-
 # Iniciando processo de resgate de informações e download de imagens
 # ==================================================================
 def beginProcess(albumURL):
 	if albumURL == None:
 		albumURL = raw_input("Insira a URL do álbum desejado: ")
-
-	albumURL = cleanURL(albumURL)
+	
 	checkURLDomain(albumURL)
 	print("[G.E-Downloader] Carregando informações do álbum (isto pode levar um tempo) ...")
 	

@@ -1,0 +1,18 @@
+G.E-Downloader
+==============
+
+Faça o download de doujinshis e mangás do g.e-hentai!
+-----------------------------------------------------
+
+CHANGELOG:
+==========
+
+VERSÃO 1.0.1 - CLI/GUI:
+- Adicionado método de limpeza da URL, permitindo baixar o álbum por completo caso insira a URL de outra página.
+
+#---------------------------------------------------------------------------------------------------------------
+
+VERSÃO 1.0.0 - CLI/GUI:
+- Versão inicial do programa.
+
+#---------------------------------------------------------------------------------------------------------------

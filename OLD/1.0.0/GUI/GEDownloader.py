@@ -26,8 +26,8 @@ SOFTWARE.
 
 #========================================
 # Criado por: Wolfterro
-# Versão: 1.0.1 - Python 2.x
-# Data: 24/10/2016
+# Versão: 1.0.0 - Python 2.x
+# Data: 17/10/2016
 #========================================
 
 from PyQt4 import QtCore, QtGui
@@ -50,7 +50,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.0.1"
+version = "1.0.0"
 if platform.system() == "Windows":
 	buf = ctypes.create_unicode_buffer(1024)
 	ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -95,7 +95,6 @@ class Ui_MainWindow(object):
 		self.gridLayout.addWidget(self.pushButton, 3, 0, 1, 3)
 		self.progressBar = QtGui.QProgressBar(self.centralwidget)
 		self.progressBar.setProperty("value", 0)
-		self.progressBar.setAlignment(QtCore.Qt.AlignCenter)
 		self.progressBar.setObjectName(_fromUtf8("progressBar"))
 		self.gridLayout.addWidget(self.progressBar, 5, 0, 1, 3)
 		self.label = QtGui.QLabel(self.centralwidget)
@@ -253,13 +252,13 @@ class Ui_MainWindow(object):
 
 	# Resgatando as imagens e o número de imagens do álbum
 	# ====================================================
-	def getAlbumImages(self, cleanedAlbumURL, albumID):
+	def getAlbumImages(self, albumURL, albumID):
 		self.links = []
 		self.imgs = []
 		self.pages = []
 		
 		try:
-			self.requestTwo = urllib2.Request(str(self.cleanedAlbumURL), headers={'Cookie' : 'nw=1'})
+			self.requestTwo = urllib2.Request(str(self.albumURL), headers={'Cookie' : 'nw=1'})
 			self.responseTwo = urllib2.urlopen(self.requestTwo)
 			self.soupTwo = BeautifulSoup(self.responseTwo, 'html.parser')
 		except Exception as self.eeTwo:
@@ -320,16 +319,16 @@ class Ui_MainWindow(object):
 
 	# Resgatando a ID do álbum
 	# ========================
-	def getAlbumID(self, cleanedAlbumURL):
-		self.urlSplitID = urlparse.urlsplit(str(self.cleanedAlbumURL))
+	def getAlbumID(self, albumURL):
+		self.urlSplitID = urlparse.urlsplit(str(self.albumURL))
 		self.urlID = str(self.urlSplitID[2]).split("/", 3)[2]
 		return self.urlID
 
 	# Resgatando o título do álbum
 	# ============================
-	def getAlbumTitle(self, cleanedAlbumURL):
+	def getAlbumTitle(self, albumURL):
 		try:
-			self.requestOne = urllib2.Request(str(self.cleanedAlbumURL), headers={'Cookie' : 'nw=1'})
+			self.requestOne = urllib2.Request(str(self.albumURL), headers={'Cookie' : 'nw=1'})
 			self.responseOne = urllib2.urlopen(self.requestOne)
 			self.soupOne = BeautifulSoup(self.responseOne, 'html.parser')
 		except Exception as self.eeOne:
@@ -348,32 +347,25 @@ class Ui_MainWindow(object):
 	
 	# Verificando se a URL inserida pertence ao domínio g.e-hentai.org
 	# ================================================================
-	def checkURLDomain(self, cleanedAlbumURL):
-		self.urlSplit = urlparse.urlsplit(str(self.cleanedAlbumURL))
+	def checkURLDomain(self, albumURL):
+		self.urlSplit = urlparse.urlsplit(str(self.albumURL))
 		if str(self.urlSplit[1]) != "g.e-hentai.org":
 			self.textEdit.append(u"[G.E-Downloader] Erro! URL inválida! Tente novamente.")
 			return
 
-	# Limpando a URL para que ela aponte para a primeira página
-	# =========================================================
-	def cleanURL(self, albumURL):
-		self.cleanedAlbumURL = re.sub(r'/\?p=.*', '', str(self.albumURL))
-		return self.cleanedAlbumURL
-
 	# Iniciando processo de resgate de informações e download de imagens
 	# ==================================================================
 	def beginProcess(self, albumURL):
-		self.cleanedAlbumURL = self.cleanURL(self.albumURL)
-		self.checkURLDomain(self.cleanedAlbumURL)
+		self.checkURLDomain(self.albumURL)
 		self.textEdit.append(u"[G.E-Downloader] Carregando informações do álbum (isto pode levar um tempo) ...")
 		QtGui.QApplication.processEvents()
 		
-		self.albumTitle = self.getAlbumTitle(self.cleanedAlbumURL)
+		self.albumTitle = self.getAlbumTitle(self.albumURL)
 		if self.albumTitle == None:
 			return
 
-		self.albumID = self.getAlbumID(self.cleanedAlbumURL)
-		self.albumImages, self.albumSize = self.getAlbumImages(self.cleanedAlbumURL, self.albumID)
+		self.albumID = self.getAlbumID(self.albumURL)
+		self.albumImages, self.albumSize = self.getAlbumImages(self.albumURL, self.albumID)
 		self.albumURLImages = self.getImagesURL(self.albumImages)
 		self.createAlbumDir(self.albumTitle)
 		self.downloadAlbumImages(self.albumURLImages, self.albumSize)
