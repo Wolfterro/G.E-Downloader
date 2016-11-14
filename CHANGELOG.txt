@@ -7,6 +7,14 @@ Faça o download de doujinshis e mangás do g.e-hentai!
 CHANGELOG:
 ==========
 
+VERSÃO 1.0.2 - CLI/GUI:
+- Alterado método de criação de pastas, impedindo erros ao criar pastas com símbolos especiais no Windows.
+- Adicionado botão de cancelar download. (GUI apenas)
+- Alterado modo de download das imagens:
+--- Caso a imagem já exista, o programa não irá substituí-la. (GUI apenas)
+
+#---------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.0.1 - CLI/GUI:
 - Adicionado método de limpeza da URL, permitindo baixar o álbum por completo caso insira a URL de outra página.
 

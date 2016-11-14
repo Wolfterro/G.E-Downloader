@@ -27,8 +27,8 @@ SOFTWARE.
 
 #========================================
 # Criado por: Wolfterro
-# Versão: 1.0.1 - Python 2.x
-# Data: 24/10/2016
+# Versão: 1.0.2 - Python 2.x
+# Data: 14/11/2016
 #========================================
 
 from __future__ import print_function
@@ -47,12 +47,17 @@ sys.setdefaultencoding('utf-8')
 
 # Versão
 # ======
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 
 # Criando um diretório para as imagens do álbum
 # =============================================
 def createAlbumDir(albumTitle):
-	albumTitle = albumTitle.replace("/", "").replace("\\", "")
+	invalidChars = ["\\", "/", ":", "*", "?", "<", ">", "|"]
+	
+	for i in albumTitle:
+		if i in invalidChars:
+			albumTitle = albumTitle.replace(i, "")
+
 	if os.path.exists(albumTitle):
 		os.chdir(albumTitle)
 	else:

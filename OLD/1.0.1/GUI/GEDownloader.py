@@ -26,8 +26,8 @@ SOFTWARE.
 
 #========================================
 # Criado por: Wolfterro
-# Versão: 1.0.2 - Python 2.x
-# Data: 14/11/2016
+# Versão: 1.0.1 - Python 2.x
+# Data: 24/10/2016
 #========================================
 
 from PyQt4 import QtCore, QtGui
@@ -50,7 +50,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.0.2"
+version = "1.0.1"
 if platform.system() == "Windows":
 	buf = ctypes.create_unicode_buffer(1024)
 	ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -78,11 +78,8 @@ except AttributeError:
 # =====================================================
 class Ui_MainWindow(object):
 	def setupUi(self, MainWindow):
-		global cancel
-		self.cancel = False
-
 		MainWindow.setObjectName(_fromUtf8("MainWindow"))
-		MainWindow.resize(500, 600)
+		MainWindow.resize(500, 580)
 		icon = QtGui.QIcon()
 		icon.addPixmap(QtGui.QPixmap(_fromUtf8("Icon.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 		MainWindow.setWindowIcon(icon)
@@ -94,11 +91,6 @@ class Ui_MainWindow(object):
 		self.pushButton.setObjectName(_fromUtf8("pushButton"))
 		
 		self.pushButton.clicked.connect(self.getUserValues)
-
-		self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
-		self.pushButton_2.setObjectName(_fromUtf8("pushButton"))
-		self.pushButton_2.clicked.connect(self.cancelDownload)
-		self.gridLayout.addWidget(self.pushButton_2, 6, 0, 1, 3)
 		
 		self.gridLayout.addWidget(self.pushButton, 3, 0, 1, 3)
 		self.progressBar = QtGui.QProgressBar(self.centralwidget)
@@ -151,8 +143,6 @@ class Ui_MainWindow(object):
 		self.lineEdit.setToolTip(_translate("MainWindow", "<html><head/><body><p>Insira a URL do álbum desejado</p></body></html>", None))
 		self.toolButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Escolher pasta de destino...</p></body></html>", None))
 		self.pushButton.setToolTip(_translate("MainWindow", "<html><head/><body><p>Iniciar o download do álbum</p></body></html>", None))
-		self.pushButton_2.setToolTip(_translate("MainWindow", "<html><head/><body><p>Cancelar o download das imagens</p></body></html>", None))
-		self.pushButton_2.setText(_translate("MainWindow", "Cancelar", None))
 
 	# ===================================================================
 	# Métodos do programa: Resgate de informações e download das imagens.
@@ -185,16 +175,9 @@ class Ui_MainWindow(object):
 	# Criando um diretório para as imagens do álbum
 	# =============================================
 	def createAlbumDir(self, albumTitle):
-		self.invalidChars = ["\\", "/", ":", "*", "?", "<", ">", "|"]
-
-		for self.char in self.albumTitle:
-			if self.char in self.invalidChars:
-				self.albumTitle = self.albumTitle.replace(self.char, "")
-		
+		self.albumTitle = self.albumTitle.replace("/", "").replace("\\", "")
 		if os.path.exists(unicode(self.albumTitle)):
 			os.chdir(unicode(self.albumTitle))
-			self.textEdit.append(u"[G.E-Downloader] Baixando em '%s' ..." % (unicode(self.albumTitle)))
-			QtGui.QApplication.processEvents()
 		else:
 			self.textEdit.append(u"[G.E-Downloader] Criando pasta '%s' ..." % (unicode(self.albumTitle)))
 			QtGui.QApplication.processEvents()
@@ -224,40 +207,29 @@ class Ui_MainWindow(object):
 		
 		self.count = 1
 		for self.images in self.albumURLImages:
-			if self.cancel == True:
-				self.textEdit.append(u"[G.E-Downloader] Cancelado!!")
+			try:
+				self.requestFour = urllib2.Request(str(self.images), headers={'Cookie' : 'nw=1'})
+				self.responseFour = urllib2.urlopen(self.requestFour)
+				self.total = self.responseFour.headers['content-length']
+			except Exception as self.eeSix:
+				self.textEdit.append(u"[G.E-Downloader] Erro! Não foi possível baixar a imagem!")
+				self.textEdit.append(u"[G.E-Downloader] Erro: %s" % (str(self.eeSix)))
 				QtGui.QApplication.processEvents()
-				return False
-			else:
-				self.filename = os.path.basename(str(self.images))
-				
-				if os.path.exists(str(self.filename)):
-					self.textEdit.append(u"[G.E-Downloader] Imagem '%s' já existe! Pulando ..." % (str(self.filename)))
-					QtGui.QApplication.processEvents()
-					self.count += 1
-				else:
-					try:
-						self.requestFour = urllib2.Request(str(self.images), headers={'Cookie' : 'nw=1'})
-						self.responseFour = urllib2.urlopen(self.requestFour)
-						self.total = self.responseFour.headers['content-length']
-					except Exception as self.eeSix:
-						self.textEdit.append(u"[G.E-Downloader] Erro! Não foi possível baixar a imagem!")
-						self.textEdit.append("[G.E-Downloader] Erro: %s" % (str(self.eeSix)))
-						QtGui.QApplication.processEvents()
-						return
-					
-					self.downloaded = 0
-					
-					self.textEdit.append(u"[G.E-Downloader] Baixando imagem '%s' - %s/%s ..." % (str(self.filename), str(self.count), str(self.albumSize)))
-					with open(str(self.filename), 'wb') as self.file:
-						while True:
-							self.data = self.responseFour.read(4096)
-							self.downloaded += len(self.data)
-							if not self.data:
-								break
-							self.file.write(self.data)
-							self.setProgress(self.downloaded, self.total)
-					self.count += 1
+				return
+			
+			self.downloaded = 0
+			
+			self.filename = os.path.basename(str(self.images))
+			self.textEdit.append(u"[G.E-Downloader] Baixando imagem '%s' - %s/%s ..." % (str(self.filename), str(self.count), str(self.albumSize)))
+			with open(str(self.filename), 'wb') as self.file:
+				while True:
+					self.data = self.responseFour.read(4096)
+					self.downloaded += len(self.data)
+					if not self.data:
+						break
+					self.file.write(self.data)
+					self.setProgress(self.downloaded, self.total)
+			self.count += 1
 
 	# Resgatando o endereço URL das imagens que serão baixadas
 	# ========================================================
@@ -271,7 +243,7 @@ class Ui_MainWindow(object):
 					self.soupThree = BeautifulSoup(self.responseThree, 'html.parser')
 				except Exception as self.eeFour:
 					self.textEdit.append(u"[G.E-Downloader] Erro! Não foi possível carregar informações!")
-					self.textEdit.append("[G.E-Downloader] Erro: %s" % (str(self.eeFour)))
+					self.textEdit.append(u"[G.E-Downloader] Erro: %s" % (str(self.eeFour)))
 					QtGui.QApplication.processEvents()
 					return
 
@@ -292,7 +264,7 @@ class Ui_MainWindow(object):
 			self.soupTwo = BeautifulSoup(self.responseTwo, 'html.parser')
 		except Exception as self.eeTwo:
 			self.textEdit.append(u"[G.E-Downloader] Erro! Não foi possível carregar informações!")
-			self.textEdit.append("[G.E-Downloader] Erro: %s" % (str(self.eeTwo)))
+			self.textEdit.append(u"[G.E-Downloader] Erro: %s" % (str(self.eeTwo)))
 			QtGui.QApplication.processEvents()
 			return
 
@@ -329,7 +301,7 @@ class Ui_MainWindow(object):
 						self.soupPg = BeautifulSoup(self.responsePg, 'html.parser')
 					except Exception as self.eeThree:
 						self.textEdit.append(u"[G.E-Downloader] Erro! Não foi possível carregar informações!")
-						self.textEdit.append("[G.E-Downloader] Erro: %s" % (str(self.eeThree)))
+						self.textEdit.append(u"[G.E-Downloader] Erro: %s" % (str(self.eeThree)))
 						QtGui.QApplication.processEvents()
 						return
 
@@ -362,7 +334,7 @@ class Ui_MainWindow(object):
 			self.soupOne = BeautifulSoup(self.responseOne, 'html.parser')
 		except Exception as self.eeOne:
 			self.textEdit.append(u"[G.E-Downloader] Erro! Não foi possível carregar informações!")
-			self.textEdit.append("[G.E-Downloader] Erro: %s" % (str(self.eeOne)))
+			self.textEdit.append(u"[G.E-Downloader] Erro: %s" % (str(self.eeOne)))
 			QtGui.QApplication.processEvents()
 			return
 		
@@ -370,7 +342,7 @@ class Ui_MainWindow(object):
 			return self.soupOne.title.string.replace(" - E-Hentai Galleries", "")
 		except Exception as self.eeFive:
 			self.textEdit.append(u"[G.E-Downloader] Erro! Não foi possível carregar informações!")
-			self.textEdit.append("[G.E-Downloader] Erro: %s" % (str(self.eeFive)))
+			self.textEdit.append(u"[G.E-Downloader] Erro: %s" % (str(self.eeFive)))
 			QtGui.QApplication.processEvents()
 			return None
 	
@@ -423,7 +395,6 @@ class Ui_MainWindow(object):
 			self.textEdit.append(u"[G.E-Downloader] Erro! Falta o caminho para a pasta de destino!")
 			return
 		else:
-			self.cancel = False
 			self.pushButton.setEnabled(False)
 			self.pushButton.setText(_translate("MainWindow", "Downloading...", None))
 			self.pushButton.repaint()
@@ -458,12 +429,6 @@ class Ui_MainWindow(object):
 					pass
 
 			return
-
-	# Método para cancelar o processo de download.
-	# ============================================
-	def cancelDownload(self):
-		self.cancel = True
-		return
 
 # Executando o Programa.
 # ======================
