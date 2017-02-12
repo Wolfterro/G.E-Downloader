@@ -1,8 +1,8 @@
 # G.E-Downloader
-## Faça o download de doujinshis e mangás do g.e-hentai!
+## Faça o download de doujinshis e mangás do e-hentai!
 
 ### Descrição:
-#### Este é um simples programa em Python que possui a função de fazer o download dos álbuns do g.e-hentai escolhidos pelo usuário.
+#### Este é um simples programa em Python que possui a função de fazer o download dos álbuns do e-hentai (g.e-hentai) escolhidos pelo usuário.
 
 #### Ao executar o programa sem utilizar argumentos pela linha de comando, o programa irá pedir ao usuário a URL do álbum desejado. Ele então irá carregar todas as informações do álbum para que o download das imagens possa ser realizado.
 
@@ -71,8 +71,8 @@
 
 ### Download (GUI):
 
-#### Linux: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.2-Linux
+#### Linux: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.3-Linux
 
-#### Windows: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.2-Windows
+#### Windows: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.3-Windows
 
 #### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/G.E-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
