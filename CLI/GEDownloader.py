@@ -27,8 +27,8 @@ SOFTWARE.
 
 #========================================
 # Criado por: Wolfterro
-# Versão: 1.0.2 - Python 2.x
-# Data: 14/11/2016
+# Versão: 1.0.3 - Python 2.x
+# Data: 11/02/2017
 #========================================
 
 from __future__ import print_function
@@ -47,7 +47,7 @@ sys.setdefaultencoding('utf-8')
 
 # Versão
 # ======
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 
 # Criando um diretório para as imagens do álbum
 # =============================================
@@ -143,12 +143,12 @@ def getAlbumImages(albumURL, albumID):
 		print("[G.E-Downloader] Erro: %s" % (ee))
 		sys.exit(1)
 
-	toMatchImages = r'http://g.e-hentai.org/.*/.*/' + albumID + r'-.*'
-	toMatchPages = r'http://g.e-hentai.org/.*/' + albumID + r'/.*/\?p=.*'
+	toMatchImages = r'https://e-hentai.org/.*/.*/' + albumID + r'-.*'
+	toMatchPages = r'https://e-hentai.org/.*/' + albumID + r'/.*/\?p=.*'
 	
 	for img in soup.findAll('a', href=True):
 		links.append(img['href'])
-	
+
 	for img in links:
 		matchImg = re.findall(toMatchImages, img)
 		if matchImg == []:
@@ -217,7 +217,7 @@ def getAlbumTitle(albumURL):
 # ================================================================
 def checkURLDomain(albumURL):
 	urlSplit = urlparse.urlsplit(albumURL)
-	if str(urlSplit[1]) != "g.e-hentai.org":
+	if str(urlSplit[1]) != "e-hentai.org":
 		print("[G.E-Downloader] Erro! URL inválida! Saindo ...")
 		sys.exit(1)
 

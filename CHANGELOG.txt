@@ -1,11 +1,17 @@
 G.E-Downloader
 ==============
 
-Faça o download de doujinshis e mangás do g.e-hentai!
------------------------------------------------------
+Faça o download de doujinshis e mangás do e-hentai!
+---------------------------------------------------
 
 CHANGELOG:
 ==========
+
+VERSÃO 1.0.3 - CLI/GUI:
+- Atualizado endereços válidos para o álbum e as imagens.
+--- Ao invés de procurar as imagens no subdomínio 'g.e-hentai', o programa irá procurar em 'e-hentai'.
+
+#---------------------------------------------------------------------------------------------------------------
 
 VERSÃO 1.0.2 - CLI/GUI:
 - Alterado método de criação de pastas, impedindo erros ao criar pastas com símbolos especiais no Windows.

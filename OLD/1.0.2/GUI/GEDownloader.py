@@ -26,8 +26,8 @@ SOFTWARE.
 
 #========================================
 # Criado por: Wolfterro
-# Versão: 1.0.3 - Python 2.x
-# Data: 11/02/2017
+# Versão: 1.0.2 - Python 2.x
+# Data: 14/11/2016
 #========================================
 
 from PyQt4 import QtCore, QtGui
@@ -50,7 +50,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.0.3"
+version = "1.0.2"
 if platform.system() == "Windows":
 	buf = ctypes.create_unicode_buffer(1024)
 	ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -296,8 +296,8 @@ class Ui_MainWindow(object):
 			QtGui.QApplication.processEvents()
 			return
 
-		self.toMatchImages = r'https://e-hentai.org/.*/.*/' + str(self.albumID) + r'-.*'
-		self.toMatchPages = r'https://e-hentai.org/.*/' + str(self.albumID) + r'/.*/\?p=.*'
+		self.toMatchImages = r'http://g.e-hentai.org/.*/.*/' + str(self.albumID) + r'-.*'
+		self.toMatchPages = r'http://g.e-hentai.org/.*/' + str(self.albumID) + r'/.*/\?p=.*'
 		
 		for self.img in self.soupTwo.findAll('a', href=True):
 			self.links.append(self.img['href'])
@@ -378,7 +378,7 @@ class Ui_MainWindow(object):
 	# ================================================================
 	def checkURLDomain(self, cleanedAlbumURL):
 		self.urlSplit = urlparse.urlsplit(str(self.cleanedAlbumURL))
-		if str(self.urlSplit[1]) != "e-hentai.org":
+		if str(self.urlSplit[1]) != "g.e-hentai.org":
 			self.textEdit.append(u"[G.E-Downloader] Erro! URL inválida! Tente novamente.")
 			return
 
