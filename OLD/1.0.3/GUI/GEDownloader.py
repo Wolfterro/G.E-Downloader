@@ -50,7 +50,7 @@ sys.setdefaultencoding('utf-8')
 
 # Definindo Versão do Programa e determinando a pasta 'home' do usuário.
 # ======================================================================
-version = "1.0.4"
+version = "1.0.3"
 if platform.system() == "Windows":
 	buf = ctypes.create_unicode_buffer(1024)
 	ctypes.windll.kernel32.GetEnvironmentVariableW(u"USERPROFILE", buf, 1024)
@@ -237,7 +237,7 @@ class Ui_MainWindow(object):
 					self.count += 1
 				else:
 					try:
-						self.requestFour = urllib2.Request(str(self.images), headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+						self.requestFour = urllib2.Request(str(self.images), headers={'Cookie' : 'nw=1'})
 						self.responseFour = urllib2.urlopen(self.requestFour)
 						self.total = self.responseFour.headers['content-length']
 					except Exception as self.eeSix:
@@ -266,7 +266,7 @@ class Ui_MainWindow(object):
 		for self.imageURL in self.albumImages:
 			for self.u in self.imageURL:
 				try:
-					self.requestThree = urllib2.Request(str(self.u), headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+					self.requestThree = urllib2.Request(str(self.u), headers={'Cookie' : 'nw=1'})
 					self.responseThree = urllib2.urlopen(self.requestThree)
 					self.soupThree = BeautifulSoup(self.responseThree, 'html.parser')
 				except Exception as self.eeFour:
@@ -287,7 +287,7 @@ class Ui_MainWindow(object):
 		self.pages = []
 		
 		try:
-			self.requestTwo = urllib2.Request(str(self.cleanedAlbumURL), headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+			self.requestTwo = urllib2.Request(str(self.cleanedAlbumURL), headers={'Cookie' : 'nw=1'})
 			self.responseTwo = urllib2.urlopen(self.requestTwo)
 			self.soupTwo = BeautifulSoup(self.responseTwo, 'html.parser')
 		except Exception as self.eeTwo:
@@ -324,7 +324,7 @@ class Ui_MainWindow(object):
 
 				for self.l in self.pg:
 					try:
-						self.requestPg = urllib2.Request(str(self.l), headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+						self.requestPg = urllib2.Request(str(self.l), headers={'Cookie' : 'nw=1'})
 						self.responsePg = urllib2.urlopen(self.requestPg)
 						self.soupPg = BeautifulSoup(self.responsePg, 'html.parser')
 					except Exception as self.eeThree:
@@ -357,7 +357,7 @@ class Ui_MainWindow(object):
 	# ============================
 	def getAlbumTitle(self, cleanedAlbumURL):
 		try:
-			self.requestOne = urllib2.Request(str(self.cleanedAlbumURL), headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+			self.requestOne = urllib2.Request(str(self.cleanedAlbumURL), headers={'Cookie' : 'nw=1'})
 			self.responseOne = urllib2.urlopen(self.requestOne)
 			self.soupOne = BeautifulSoup(self.responseOne, 'html.parser')
 		except Exception as self.eeOne:

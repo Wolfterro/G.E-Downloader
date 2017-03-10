@@ -47,7 +47,7 @@ sys.setdefaultencoding('utf-8')
 
 # Versão
 # ======
-VERSION = "1.0.4"
+VERSION = "1.0.3"
 
 # Criando um diretório para as imagens do álbum
 # =============================================
@@ -84,7 +84,7 @@ def downloadAlbumImages(albumURLImages, albumSize):
 	count = 1
 	for images in albumURLImages:
 		try:
-			request = urllib2.Request(images, headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+			request = urllib2.Request(images, headers={'Cookie' : 'nw=1'})
 			response = urllib2.urlopen(request)
 			total = response.headers['content-length']
 		except Exception as ee:
@@ -115,7 +115,7 @@ def getImagesURL(albumImages):
 	for imageURL in albumImages:
 		for u in imageURL:
 			try:
-				request = urllib2.Request(u, headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+				request = urllib2.Request(u, headers={'Cookie' : 'nw=1'})
 				response = urllib2.urlopen(request)
 				soup = BeautifulSoup(response, 'html.parser')
 			except Exception as ee:
@@ -135,7 +135,7 @@ def getAlbumImages(albumURL, albumID):
 	pages = []
 	
 	try:
-		request = urllib2.Request(albumURL, headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+		request = urllib2.Request(albumURL, headers={'Cookie' : 'nw=1'})
 		response = urllib2.urlopen(request)
 		soup = BeautifulSoup(response, 'html.parser')
 	except Exception as ee:
@@ -171,7 +171,7 @@ def getAlbumImages(albumURL, albumID):
 
 			for l in pg:
 				try:
-					requestPg = urllib2.Request(str(l), headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+					requestPg = urllib2.Request(str(l), headers={'Cookie' : 'nw=1'})
 					responsePg = urllib2.urlopen(requestPg)
 					soupPg = BeautifulSoup(responsePg, 'html.parser')
 				except Exception as ee:
@@ -203,7 +203,7 @@ def getAlbumID(albumURL):
 # ============================
 def getAlbumTitle(albumURL):
 	try:
-		request = urllib2.Request(albumURL, headers={'Cookie' : 'nw=1', 'User-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
+		request = urllib2.Request(albumURL, headers={'Cookie' : 'nw=1'})
 		response = urllib2.urlopen(request)
 		soup = BeautifulSoup(response, 'html.parser')
 	except Exception as ee:
