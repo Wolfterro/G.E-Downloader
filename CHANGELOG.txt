@@ -7,6 +7,11 @@ Faça o download de doujinshis e mangás do e-hentai!
 CHANGELOG:
 ==========
 
+VERSÃO 1.0.4 - CLI/GUI:
+- Adicionado User-Agent aos métodos de requisição de página.
+
+#---------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.0.3 - CLI/GUI:
 - Atualizado endereços válidos para o álbum e as imagens.
 --- Ao invés de procurar as imagens no subdomínio 'g.e-hentai', o programa irá procurar em 'e-hentai'.
