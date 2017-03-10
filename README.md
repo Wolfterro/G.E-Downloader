@@ -71,8 +71,8 @@
 
 ### Download (GUI):
 
-#### Linux: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.3-Linux
+#### Linux: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.4-Linux
 
-#### Windows: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.3-Windows
+#### Windows: https://github.com/Wolfterro/G.E-Downloader/releases/tag/v1.0.4-Windows
 
 #### Caso não possua o git e queira também baixar o repositório por completo, baixe através deste [Link](https://github.com/Wolfterro/G.E-Downloader/archive/master.zip) ou clique em "Clone or Download", no topo da página.
