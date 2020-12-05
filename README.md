@@ -1,5 +1,5 @@
 # G.E-Downloader
-## Faça o download de doujinshis e mangás do e-hentai!
+## Faça o download de doujinshis!
 
 ### Descrição:
 #### Este é um simples programa em Python que possui a função de fazer o download dos álbuns do e-hentai (g.e-hentai) escolhidos pelo usuário.
